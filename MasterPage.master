@@ -1,0 +1,1899 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wildlife Center of Virginia</title>
+    <%--   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/sb-admin.css" rel="stylesheet">--%>
+    <link href="http://localhost:62931/Content/" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Load your Bootstrap Styles first -->
+    <link href="Bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <!-- favicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap v4 -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="Content/Login.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="Content/sb-admin.css" rel="stylesheet" type="text/css" media="screen">
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+
+    <link href="~/Images/logo.png" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script>
+        $(".modal-wide").on("show.bs.modal", function () {
+            var height = $(window).height() - 200;
+            $(this).find(".modal-body").css("max-height", height);
+        });
+
+    </script>
+
+
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+<%--        <div class="modal fade" id="UpdateOrganization" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header ">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Edit Organization</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlOrganization" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="OrganizationupdateDiv">
+                                    <p>&nbsp;</p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Select Organization</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Select Organization</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:DropDownList ID="ddlOrganization" runat="server" class="form-control" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="OrgName" DataValueField="OrgID" OnSelectedIndexChanged="ddlOrganization_SelectedIndexChanged1">
+                                                <asp:ListItem>--Select Organization--</asp:ListItem>
+                                            </asp:DropDownList>&nbsp&nbsp
+                                    &nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Organization Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Organization Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtOrgName" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Street Address</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Street Address</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtStreetAddress2" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>City</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>City</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtCity" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>County</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>County</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtCounty" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class=" text-right col-md-4 InternalOrganizationForm">
+                                            <h6>State</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalOrgnaizationForm">
+                                            <asp:DropDownList ID="ddlState2" class="form-control" runat="server" placeholder="Add State/Province">
+
+                                                <asp:ListItem>--Select State--</asp:ListItem>
+                                                <asp:ListItem Value="Non-USA Territory"></asp:ListItem>
+                                                <asp:ListItem Value="AL"></asp:ListItem>
+                                                <asp:ListItem Value="AK"></asp:ListItem>
+                                                <asp:ListItem Value="AZ"></asp:ListItem>
+                                                <asp:ListItem Value="AR"></asp:ListItem>
+                                                <asp:ListItem Value="CA"></asp:ListItem>
+                                                <asp:ListItem Value="CO"></asp:ListItem>
+                                                <asp:ListItem Value="CT"></asp:ListItem>
+                                                <asp:ListItem Value="DE"></asp:ListItem>
+                                                <asp:ListItem Value="FL"></asp:ListItem>
+                                                <asp:ListItem Value="GA"></asp:ListItem>
+                                                <asp:ListItem Value="HI"></asp:ListItem>
+                                                <asp:ListItem Value="ID"></asp:ListItem>
+                                                <asp:ListItem Value="IL"></asp:ListItem>
+                                                <asp:ListItem Value="IN"></asp:ListItem>
+                                                <asp:ListItem Value="IA"></asp:ListItem>
+                                                <asp:ListItem Value="KS"></asp:ListItem>
+                                                <asp:ListItem Value="KY"></asp:ListItem>
+                                                <asp:ListItem Value="LA"></asp:ListItem>
+                                                <asp:ListItem Value="ME"></asp:ListItem>
+                                                <asp:ListItem Value="MD"></asp:ListItem>
+                                                <asp:ListItem Value="MA"></asp:ListItem>
+                                                <asp:ListItem Value="MI"></asp:ListItem>
+                                                <asp:ListItem Value="MN"></asp:ListItem>
+                                                <asp:ListItem Value="MS"></asp:ListItem>
+                                                <asp:ListItem Value="MO"></asp:ListItem>
+                                                <asp:ListItem Value="MT"></asp:ListItem>
+                                                <asp:ListItem Value="NE"></asp:ListItem>
+                                                <asp:ListItem Value="NV"></asp:ListItem>
+                                                <asp:ListItem Value="NH"></asp:ListItem>
+                                                <asp:ListItem Value="NJ"></asp:ListItem>
+                                                <asp:ListItem Value="NM"></asp:ListItem>
+                                                <asp:ListItem Value="NY"></asp:ListItem>
+                                                <asp:ListItem Value="NC"></asp:ListItem>
+                                                <asp:ListItem Value="ND"></asp:ListItem>
+                                                <asp:ListItem Value="OH"></asp:ListItem>
+                                                <asp:ListItem Value="OK"></asp:ListItem>
+                                                <asp:ListItem Value="OR"></asp:ListItem>
+                                                <asp:ListItem Value="PA"></asp:ListItem>
+                                                <asp:ListItem Value="RI"></asp:ListItem>
+                                                <asp:ListItem Value="SC"></asp:ListItem>
+                                                <asp:ListItem Value="SD"></asp:ListItem>
+                                                <asp:ListItem Value="TN"></asp:ListItem>
+                                                <asp:ListItem Value="TX"></asp:ListItem>
+                                                <asp:ListItem Value="UT"></asp:ListItem>
+                                                <asp:ListItem Value="VT"></asp:ListItem>
+                                                <asp:ListItem Value="VA"></asp:ListItem>
+                                                <asp:ListItem Value="WA"></asp:ListItem>
+                                                <asp:ListItem Value="WV"></asp:ListItem>
+                                                <asp:ListItem Value="WI"></asp:ListItem>
+                                                <asp:ListItem Value="WY"></asp:ListItem>
+                                            </asp:DropDownList>
+
+                                        </div>
+                                    </div>
+                                    <p></p>
+                                    <div class="row">
+                                        <div class=" text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Postal Code</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalOrgnaizationForm">
+                                            <%--                                    <asp:TextBox ID="txtPostalCode2" runat="server"></asp:TextBox>&nbsp;&nbsp;--%>
+
+<%--                                            <div class=" col-md-8 InternalOrgnaizationForm">
+                                                <asp:TextBox ID="txtPostalCode2" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                                <h6>Primary Contact</h6>
+                                            </div>
+                                            <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                                <h6>Primary Contact</h6>
+                                            </div>
+                                            <div class=" col-md-8 InternalAnimalForm">
+                                                <asp:DropDownList ID="ddlContacts" runat="server" class="form-control" AppendDataBoundItems="false">
+                                                    <asp:ListItem>--Select Primary Contact--</asp:ListItem>
+                                                </asp:DropDownList>&nbsp&nbsp
+                                    &nbsp;&nbsp;
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="row">
+                                                <div class=" col-12">
+                                                    <br />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>&nbsp;
+            <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+                                    </div>
+                                    </div>
+                                </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <asp:Button ID="btnUpdate" class="btn btn-primary btn-inside" runat="server" Text="Save Changes" OnClick="btnUpdateOrganization_Click" />
+
+
+                </div>
+                     </div>
+            </div>
+        </div>--%>
+           <div class="modal fade" id="UpdateOrganization" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header ">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Edit Organization</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlOrganization" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="Div6">
+                                    <p>&nbsp;</p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Select Organization</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Select Organization</h6>
+                                        </div>
+                                        
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:DropDownList ID="ddlOrganization" runat="server" class="form-control" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="OrgName" DataValueField="OrgID" OnSelectedIndexChanged="ddlOrganization_SelectedIndexChanged1">
+                                                <asp:ListItem>--Select Organization--</asp:ListItem>
+                                            </asp:DropDownList>&nbsp&nbsp
+
+                                            
+
+                                    &nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Organization Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Organization Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtOrgName" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Street Address</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Street Address</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtStreetAddress2" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>City</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>City</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtCity" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>County</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>County</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtCounty" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class=" text-right col-md-4 InternalOrganizationForm">
+                                            <h6>State</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalOrgnaizationForm">
+                                            <asp:DropDownList ID="ddlState2" class="form-control" runat="server" placeholder="Add State/Province">
+
+                                                <asp:ListItem>--Select State--</asp:ListItem>
+                                                <asp:ListItem Value="Non-USA Territory"></asp:ListItem>
+                                                <asp:ListItem Value="AL"></asp:ListItem>
+                                                <asp:ListItem Value="AK"></asp:ListItem>
+                                                <asp:ListItem Value="AZ"></asp:ListItem>
+                                                <asp:ListItem Value="AR"></asp:ListItem>
+                                                <asp:ListItem Value="CA"></asp:ListItem>
+                                                <asp:ListItem Value="CO"></asp:ListItem>
+                                                <asp:ListItem Value="CT"></asp:ListItem>
+                                                <asp:ListItem Value="DE"></asp:ListItem>
+                                                <asp:ListItem Value="FL"></asp:ListItem>
+                                                <asp:ListItem Value="GA"></asp:ListItem>
+                                                <asp:ListItem Value="HI"></asp:ListItem>
+                                                <asp:ListItem Value="ID"></asp:ListItem>
+                                                <asp:ListItem Value="IL"></asp:ListItem>
+                                                <asp:ListItem Value="IN"></asp:ListItem>
+                                                <asp:ListItem Value="IA"></asp:ListItem>
+                                                <asp:ListItem Value="KS"></asp:ListItem>
+                                                <asp:ListItem Value="KY"></asp:ListItem>
+                                                <asp:ListItem Value="LA"></asp:ListItem>
+                                                <asp:ListItem Value="ME"></asp:ListItem>
+                                                <asp:ListItem Value="MD"></asp:ListItem>
+                                                <asp:ListItem Value="MA"></asp:ListItem>
+                                                <asp:ListItem Value="MI"></asp:ListItem>
+                                                <asp:ListItem Value="MN"></asp:ListItem>
+                                                <asp:ListItem Value="MS"></asp:ListItem>
+                                                <asp:ListItem Value="MO"></asp:ListItem>
+                                                <asp:ListItem Value="MT"></asp:ListItem>
+                                                <asp:ListItem Value="NE"></asp:ListItem>
+                                                <asp:ListItem Value="NV"></asp:ListItem>
+                                                <asp:ListItem Value="NH"></asp:ListItem>
+                                                <asp:ListItem Value="NJ"></asp:ListItem>
+                                                <asp:ListItem Value="NM"></asp:ListItem>
+                                                <asp:ListItem Value="NY"></asp:ListItem>
+                                                <asp:ListItem Value="NC"></asp:ListItem>
+                                                <asp:ListItem Value="ND"></asp:ListItem>
+                                                <asp:ListItem Value="OH"></asp:ListItem>
+                                                <asp:ListItem Value="OK"></asp:ListItem>
+                                                <asp:ListItem Value="OR"></asp:ListItem>
+                                                <asp:ListItem Value="PA"></asp:ListItem>
+                                                <asp:ListItem Value="RI"></asp:ListItem>
+                                                <asp:ListItem Value="SC"></asp:ListItem>
+                                                <asp:ListItem Value="SD"></asp:ListItem>
+                                                <asp:ListItem Value="TN"></asp:ListItem>
+                                                <asp:ListItem Value="TX"></asp:ListItem>
+                                                <asp:ListItem Value="UT"></asp:ListItem>
+                                                <asp:ListItem Value="VT"></asp:ListItem>
+                                                <asp:ListItem Value="VA"></asp:ListItem>
+                                                <asp:ListItem Value="WA"></asp:ListItem>
+                                                <asp:ListItem Value="WV"></asp:ListItem>
+                                                <asp:ListItem Value="WI"></asp:ListItem>
+                                                <asp:ListItem Value="WY"></asp:ListItem>
+                                            </asp:DropDownList>
+
+                                        </div>
+                                    </div>
+                                    <p></p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                                <h6>Postal Code</h6>
+                                            </div>
+                                            <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                                <h6>Postal Code</h6>
+                                            </div>
+                                        
+                                            <div class=" col-md-8 InternalOrgnaizationForm">
+                                                <asp:TextBox ID="txtPostalCode2" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="row">
+                                            <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                                <h6>Primary Contact</h6>
+                                            </div>
+                                            <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                                <h6>Primary Contact</h6>
+                                            </div>
+                                            <div class=" col-md-8 InternalAnimalForm">
+                                                <asp:DropDownList ID="ddlContacts" runat="server" class="form-control" AppendDataBoundItems="false">
+                                                    <asp:ListItem>--Select Primary Contact--</asp:ListItem>
+                                                </asp:DropDownList>&nbsp&nbsp
+                                    &nbsp;&nbsp;
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="row">
+                                                <div class=" col-12">
+                                                    <br />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <asp:Label ID="Label9" runat="server" Text=""></asp:Label>&nbsp;
+            <asp:Label ID="Label10" runat="server" Text=""></asp:Label>
+                                    
+                                    </div>
+                                </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <asp:Button ID="btnUpdate" class="btn btn-primary btn-inside" runat="server" Text="Save Changes" OnClick="btnUpdateOrganization_Click"/>
+
+                    </div>
+                </div>
+            </div>
+                </div>
+
+        </div>
+        
+
+
+
+        <div class="modal fade" id="AddProgram" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Add New Program Theme</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        &nbsp&nbsp
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlOrganization" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="AnimalAddDiv">
+                                    <p>&nbsp;</p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                            <h6>Program Category</h6>
+                                        </div>
+                                        &nbsp 
+                                <div class=" col-md-6 InternalAnimalForm">
+                                    <asp:DropDownList class="btn btn-block dropdown-toggle" Style="background-color: #FFFfff !important; color: #732700 !important; border-color: grey;" ID="ddlThemeCategory" runat="server">
+                                        <asp:ListItem>-- Select Program Category --</asp:ListItem>
+                                        <asp:ListItem>Live Program</asp:ListItem>
+                                        <asp:ListItem>Online Program</asp:ListItem>
+                                    </asp:DropDownList>&nbsp;&nbsp;
+                                </div>
+                                        <br />
+
+                                        <div class="d-none d-md-block text-right col-md-5  InternalOrganizationForm">
+                                            <h6>Program Theme Name *</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-5  InternalOrganizationForm">
+                                            <h6>Program Theme Name *</h6>
+                                        </div>
+
+                                        <div class=" col-md-6 InternalAnimalForm">
+
+                                            <asp:TextBox class="form-control btn-block" ID="txtProgramName" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                        </div>
+                                        
+
+                                    </div>
+                                    <div>
+                                    </div>
+                                    <asp:Label ID="Label3" runat="server" Text=""></asp:Label>&nbsp;
+            <asp:Label ID="Label4" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <asp:Button ID="btnAddProgram" class="btn btn-primary btn-inside" runat="server" Text="Submit" OnClick="btnAddProgramType_Click" />
+                        <%-- <button type="button" class="btn btn-primary btn-inside">Save changes</button>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="UpdateProgram" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Edit Program Theme</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        &nbsp&nbsp
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlOrganization" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="Div4">
+                                    <p>&nbsp;</p>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                            <h6>Select Theme Category</h6>
+                                        </div>
+                                        <div class=" col-md-6 InternalAnimalForm">
+                                            <asp:DropDownList ID="ddlProgramThemeCategory" class="btn  btn-block dropdown-toggle" Style="background-color: #FFFfff !important; color: #732700 !important; border-color: grey;" runat="server" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="ProgramName" DataValueField="ProgramTypeID" OnSelectedIndexChanged="ddlProgramThemeCategory_SelectedIndexChanged">
+                                                <asp:ListItem>--Select Program Category--</asp:ListItem>
+                                                <asp:ListItem Value="1">Live Program</asp:ListItem>
+                                                <asp:ListItem Value="2">Online Program</asp:ListItem>
+
+                                            </asp:DropDownList>&nbsp;&nbsp;
+                                        </div>
+                                        <br />
+                                        <br />
+
+                                        <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                            <h6>Select Theme Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                            <h6>Select Theme Name</h6>
+                                        </div>
+                                        <div class=" col-md-6 InternalEducatorForm">
+
+                                            <asp:DropDownList ID="ddlProgramThemeName" class="btn btn-block dropdown-toggle" Style="background-color: #FFFfff !important; color: #732700 !important; border-color: grey;" runat="server" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="ProgramName" DataValueField="ProgramTypeID" OnSelectedIndexChanged="ddlProgramThemeName_SelectedIndexChanged">
+                                                <asp:ListItem>--Select Program Theme--</asp:ListItem>
+                                            </asp:DropDownList>
+                                            &nbsp;&nbsp;
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+
+
+
+
+                                        <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                            <h6>Program Theme Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                            <h6>Program Theme Name</h6>
+                                        </div>
+                                        <div class=" col-md-6 InternalAnimalForm">
+                                            <asp:TextBox class=" form-control" ID="txtProgramThemeName" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+
+
+                                        <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" col-md-6 InternalEducatorForm">
+
+                                            <asp:DropDownList ID="ddlThemeStatus" class="btn btn-block  dropdown-toggle" Style="background-color: #FFFfff !important; color: #732700 !important; border-color: grey;" runat="server">
+                                                <asp:ListItem Text="--Status--" Value=""></asp:ListItem>
+                                                <asp:ListItem>Active</asp:ListItem>
+                                                <asp:ListItem>Inactive</asp:ListItem>
+                                            </asp:DropDownList>
+
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                    </div>
+                                    <asp:Label ID="Label5" runat="server" Text=""></asp:Label>&nbsp;
+            <asp:Label ID="Label6" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <asp:Button ID="btnUpdateTheme" class="btn btn-primary btn-inside" runat="server" Text="Update" OnClick="btnUpdateProgramType_Click" />
+                        <%-- <button type="button" class="btn btn-primary btn-inside">Save changes</button>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    <%--    <div class="modal" id="test" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+
+
+                        <div id="locationField">
+                            <input id="autocomplete" placeholder="Enter your address"
+                                onfocus="geolocate()" type="text"></input>
+                        </div>
+
+                        <table id="address" class="d-none">
+                            <tr>
+                                <td class="auto-style1">Street address</td>
+                                <td class="auto-style2">
+                                    <input class="field" id="street_number"
+                                        disabled="true"></input>
+                                </td>
+                                <td class="auto-style3" colspan="2">
+                                    <input class="field" id="route"
+                                        disabled="true"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">City</td>
+                                <!-- Note: Selection of address components in this example is typical.
+                 You may need to adjust it for the locations relevant to your app. See
+                 https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+            -->
+                                <td class="wideField" colspan="3">
+                                    <input class="field" id="locality"
+                                        disabled="true"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">State</td>
+                                <td class="slimField">
+                                    <input class="field"
+                                        id="administrative_area_level_1" disabled="true"></input>
+                                </td>
+                                <td class="label">Zip code</td>
+                                <td class="wideField">
+                                    <input class="field" id="postal_code"
+                                        disabled="true"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">Country</td>
+                                <td class="wideField" colspan="3">
+                                    <input class="field"
+                                        id="country" disabled="true"></input>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        street name<input id='streetnaming' name='' value='' class=''>
+                        city<input id='city' name='' value='' class=''>
+                        state<input id='state' name='' value='' class=''>
+                        zip<input id='zip' name='' value='' class=''>
+                        country<input id='countryName' name='' value='' class=''>
+                        empty<input id='empty' name='' value='' class=''>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+--%>
+
+
+
+        <div class="modal " id="AddOrganization" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Add New Organization</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body locationField">
+                        <div runat="server" id="OrgAddDiv">
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Organization Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Organization Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+
+                                    <asp:TextBox ID="textOrgName" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Enter Address<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Enter Address<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+                                   <%-- <asp:TextBox ID="autocomplete" placeholder="Enter your address" runat="server" onFocus="geolocate()"></asp:TextBox>&nbsp;&nbsp;--%>
+                                    <input  id="autocomplete" class="form-control" placeholder="Enter your address"  onFocus="geolocate()"  type="text"/>&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Street Address<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Street Address<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+
+                                    <input id='txtStreetAddress' name='' value=''class="form-control" >&nbsp;&nbsp;
+                                    <input id="hiddenControl" type="hidden" runat="server" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>City<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>City<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+
+                                    <input id="textOrgCity" name='' value='' class="form-control">&nbsp;&nbsp;
+                                    <input id="hiddenCity" type="hidden" runat="server" />
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>County</h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>County</h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+
+                                    <asp:TextBox ID="textOrgCounty" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=" text-right col-md-5 InternalOrganizationForm">
+                                    <h6>State<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+
+                                  <%--  <asp:DropDownList ID="ddlState" class="form-control" runat="server" placeholder="Add State/Province">
+                                        <asp:ListItem>--Select State--</asp:ListItem>
+                                        <asp:ListItem Value="Non-USA Territory"></asp:ListItem>
+                                        <asp:ListItem Value="AL"></asp:ListItem>
+                                        <asp:ListItem Value="AK"></asp:ListItem>
+                                        <asp:ListItem Value="AZ"></asp:ListItem>
+                                        <asp:ListItem Value="AR"></asp:ListItem>
+                                        <asp:ListItem Value="CA"></asp:ListItem>
+                                        <asp:ListItem Value="CO"></asp:ListItem>
+                                        <asp:ListItem Value="CT"></asp:ListItem>
+                                        <asp:ListItem Value="DE"></asp:ListItem>
+                                        <asp:ListItem Value="FL"></asp:ListItem>
+                                        <asp:ListItem Value="GA"></asp:ListItem>
+                                        <asp:ListItem Value="HI"></asp:ListItem>
+                                        <asp:ListItem Value="ID"></asp:ListItem>
+                                        <asp:ListItem Value="IL"></asp:ListItem>
+                                        <asp:ListItem Value="IN"></asp:ListItem>
+                                        <asp:ListItem Value="IA"></asp:ListItem>
+                                        <asp:ListItem Value="KS"></asp:ListItem>
+                                        <asp:ListItem Value="KY"></asp:ListItem>
+                                        <asp:ListItem Value="LA"></asp:ListItem>
+                                        <asp:ListItem Value="ME"></asp:ListItem>
+                                        <asp:ListItem Value="MD"></asp:ListItem>
+                                        <asp:ListItem Value="MA"></asp:ListItem>
+                                        <asp:ListItem Value="MI"></asp:ListItem>
+                                        <asp:ListItem Value="MN"></asp:ListItem>
+                                        <asp:ListItem Value="MS"></asp:ListItem>
+                                        <asp:ListItem Value="MO"></asp:ListItem>
+                                        <asp:ListItem Value="MT"></asp:ListItem>
+                                        <asp:ListItem Value="NE"></asp:ListItem>
+                                        <asp:ListItem Value="NV"></asp:ListItem>
+                                        <asp:ListItem Value="NH"></asp:ListItem>
+                                        <asp:ListItem Value="NJ"></asp:ListItem>
+                                        <asp:ListItem Value="NM"></asp:ListItem>
+                                        <asp:ListItem Value="NY"></asp:ListItem>
+                                        <asp:ListItem Value="NC"></asp:ListItem>
+                                        <asp:ListItem Value="ND"></asp:ListItem>
+                                        <asp:ListItem Value="OH"></asp:ListItem>
+                                        <asp:ListItem Value="OK"></asp:ListItem>
+                                        <asp:ListItem Value="OR"></asp:ListItem>
+                                        <asp:ListItem Value="PA"></asp:ListItem>
+                                        <asp:ListItem Value="RI"></asp:ListItem>
+                                        <asp:ListItem Value="SC"></asp:ListItem>
+                                        <asp:ListItem Value="SD"></asp:ListItem>
+                                        <asp:ListItem Value="TN"></asp:ListItem>
+                                        <asp:ListItem Value="TX"></asp:ListItem>
+                                        <asp:ListItem Value="UT"></asp:ListItem>
+                                        <asp:ListItem Value="VT"></asp:ListItem>
+                                        <asp:ListItem Value="VA"></asp:ListItem>
+                                        <asp:ListItem Value="WA"></asp:ListItem>
+                                        <asp:ListItem Value="WV"></asp:ListItem>
+                                        <asp:ListItem Value="WI"></asp:ListItem>
+                                        <asp:ListItem Value="WY"></asp:ListItem>
+                                    </asp:DropDownList>&nbsp;&nbsp;
+                                    </asp:DropDownList>&nbsp;&nbsp;--%>
+                                     <input id='state' name='' value='' class="form-control">&nbsp;&nbsp;
+                                    <input id="hiddenState" type="hidden" runat="server" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=" text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Postal Code<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+                                    
+                                     <input id='txtPostalCode' name='' value='' class="form-control">&nbsp;&nbsp;
+                                    <input id="hiddenZip" type="hidden" runat="server" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=" text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Primary Contact First Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+
+                                    <asp:TextBox ID="txtContactFirstName" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=" text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Primary Contact Last Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+
+                                    <asp:TextBox ID="txtContactLastName" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+
+                                </div>
+                            </div>
+
+                            <%--                            <div class="row">
+                                <div class=" text-right col-md-4 InternalOrganizationForm">
+                                    <h6>Primary Contact Phone Number</h6>
+                                </div>
+                                <div class=" col-md-8 InternalOrgnaizationForm">
+
+                                    <asp:TextBox ID="txtPhoneNumber" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>--%>
+
+                            <div class="row">
+                                <div class=" text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Primary Contact Email<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalOrgnaizationForm">
+                                    <%--                                    <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>&nbsp;&nbsp;--%>
+
+                                    <asp:TextBox ID="txtEmail" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>
+
+                            <%--                           <div class="row">
+                                <div class=" text-right col-md-4 InternalOrganizationForm">
+                                    <h6>Secondary Email</h6>
+                                </div>
+                                <div class=" col-md-8 InternalOrgnaizationForm">
+
+                                    <asp:TextBox ID="txtSecondaryEmail" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>--%>
+
+
+
+                            <div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <asp:Button ID="btnAddOrg" class="btn btn-primary btn-inside" runat="server" Text="Submit" OnClick="btnAddOrg_Click" />
+                        <%-- <button type="button" class="btn btn-primary btn-inside">Save changes</button>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%-- DO NOT DELETE THIS TABLE--%>
+    <table id="address" class="d-none">
+       <tr>
+            <td class="auto-style1">Street address</td>
+            <td class="auto-style2">
+                <input class="field" id="street_number"
+                       />
+            </td>
+            <td class="auto-style3" colspan="2">
+                <input class="field" id="route"
+                       />           
+
+            </td>
+        </tr>
+        <tr>
+            <td class="label">City</td>
+            <!-- Note: Selection of address components in this example is typical.
+                 You may need to adjust it for the locations relevant to your app. See
+                 https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+            -->
+            <td class="wideField" colspan="3">
+                <input class="field" id="locality"
+                       />
+            </td>
+        </tr>
+        <tr>
+            <td class="label">State</td>
+            <td class="slimField">
+                <input class="field"
+                       id="administrative_area_level_1"  />
+            </td>
+            <td class="label">Zip code</td>
+            <td class="wideField">
+                <input class="field" id="postal_code" />
+            </td>
+        </tr>
+        <tr>
+            <td class="label">Country</td>
+            <td class="wideField" colspan="3">
+                <input class="field"
+                       id="country" />
+            </td>
+        </tr>
+    </table>
+
+        <div class="modal fade" id="AddAnimal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header ">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Add Animal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div runat="server" id="Div1">
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Animal Type<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Animal Type<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalAnimalForm">
+
+
+                                    <asp:DropDownList class="InternalAnimalForm form-control" ID="ddlAnimalType" runat="server">
+                                        <asp:ListItem Text="--Animal Type--" Value=""></asp:ListItem>
+                                        <asp:ListItem>Bird</asp:ListItem>
+                                        <asp:ListItem>Mammal</asp:ListItem>
+                                        <asp:ListItem>Reptile</asp:ListItem>
+                                    </asp:DropDownList>&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Animal Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Animal Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalAnimalForm">
+
+                                    <asp:TextBox class="form-control" ID="txtAnimalName" runat="server"></asp:TextBox>&nbsp&nbsp
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Status<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Status<span style="COLOR: red"> *</span></h6>
+                                </div>
+
+                                <div class=" col-md-7 InternalAnimalForm">
+
+
+                                    <asp:DropDownList ID="ddlStatus" class="form-control" runat="server">
+                                        <asp:ListItem Text="--Status--" Value=""></asp:ListItem>
+                                        <asp:ListItem>Active</asp:ListItem>
+                                        <asp:ListItem>Inactive</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" col-md-5 InternalAnimalForm">
+                                    Upload Picture:
+                                    <asp:FileUpload ID="FileUpload1" runat="server" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" col-md-5 InternalAnimalForm">
+                                    <asp:Image ID="animalImage" runat="server" />
+                                </div>
+                            </div>
+                            <asp:Label ID="lblLastUpdated" runat="server" Text=""></asp:Label>&nbsp;
+            <asp:Label ID="lblLastUpdatedBy" runat="server" Text=""></asp:Label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <asp:Button ID="btnAddAnimal" class="btn btn-primary btn-inside" runat="server" Text="Submit" OnClick="btnAddAnimal_Click" />
+                        <%-- <button type="button" class="btn btn-primary btn-inside">Save changes</button>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="AddEducator" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Add New Educator</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div runat="server" id="EducatorAddDiv">
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>First Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>First Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalEducatorForm">
+
+                                    <asp:TextBox ID="txtEducatorFirstName" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Last Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Last Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalEducatorForm">
+
+                                    <asp:TextBox ID="txtEducatorLastName" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <%--    <div class="row">
+                                <div class=" col-md-4 text-right InternalEducatorForm">
+                                    <h6>Contact Email</h6>
+                                </div>
+                                 <div class=" col-md-8 InternalEducatorForm">
+                                    <asp:TextBox ID="txtEducatorEmail" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" col-md-4 text-right InternalEducatorForm">
+                                    <h6>Phone Number</h6>
+                                </div>
+                                 <div class=" col-md-8 InternalEducatorForm">
+                                    <asp:TextBox ID="txtEducatorPhone" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>--%>
+
+                            <div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <asp:Button ID="btnAddEducator" class="btn btn-primary btn-inside" runat="server" Text="Submit" OnClick="btnAddEducator_Click" />
+                        <%-- <button type="button" class="btn btn-primary btn-inside">Save changes</button>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="AddVolunteer" tabindex="-1" role="dialog">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Add New Volunteer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div runat="server" id="Div3">
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>First Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>First Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalEducatorForm">
+
+                                    <asp:TextBox ID="txtVolunteerAddFirstName" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Last Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Last Name<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalEducatorForm">
+
+                                    <asp:TextBox ID="txtVolunteerAddLastName" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Phone Number<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Phone Number<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalEducatorForm">
+
+                                    <asp:TextBox ID="txtVolunteerAddPhoneNumber" class="form-control" runat="server" placeholder="(___) ___-____"></asp:TextBox>
+                                    &nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Email<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Email<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalEducatorForm">
+
+                                    <asp:TextBox ID="txtVoluteerAddEmail" class="form-control" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-none d-md-block text-right col-md-5 InternalOrganizationForm">
+                                    <h6>Status<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" d-md-none text-left col-md-5 InternalOrganizationForm">
+                                    <h6>Status<span style="COLOR: red"> *</span></h6>
+                                </div>
+                                <div class=" col-md-7 InternalEducatorForm">
+                                    <asp:DropDownList ID="ddlVolunteerAddStatus" class="form-control" runat="server">
+                                        <asp:ListItem Text="--Status--" Value=""></asp:ListItem>
+                                        <asp:ListItem Text="Active" Value="Active"></asp:ListItem>
+                                        <asp:ListItem Text="Inactive" Value="Inactive"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+
+                            <div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <asp:Button ID="btnVolunteerAdd" class="btn btn-primary btn-inside" runat="server" Text="Submit" OnClick="btnAddVolunteer_Click" />
+                        <%-- <button type="button" class="btn btn-primary btn-inside">Save changes</button>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="UpdateAnimal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Edit Animal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlAnimal" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="AnimalEditDiv">
+                                    <p>&nbsp;</p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Select Animal</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Select Animal</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:DropDownList ID="ddlAnimal" runat="server" class="form-control" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="AnimalName" DataValueField="AnimalID" OnSelectedIndexChanged="ddlAnimal_SelectedIndexChanged1">
+                                                <asp:ListItem>--Select Animal--</asp:ListItem>
+
+                                            </asp:DropDownList>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Animal Type</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Animal Type</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList class="InternalAnimalForm form-control" ID="ddlAnimalTypeEdit" runat="server">
+                                                <asp:ListItem Text="--Animal Type--" Value=""></asp:ListItem>
+                                                <asp:ListItem Text="Bird" Value="0"></asp:ListItem>
+                                                <asp:ListItem Text="Mammal" Value="1"></asp:ListItem>
+                                                <asp:ListItem Text="Reptile" Value="2"></asp:ListItem>
+                                            </asp:DropDownList>&nbsp;&nbsp; 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Animal Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Animal Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtBoxAnimalName" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlAnimalStatus" class="form-control" runat="server">
+                                                <asp:ListItem Text="--Status--" Value=""></asp:ListItem>
+                                                <asp:ListItem Text="Active" Value="0"></asp:ListItem>
+                                                <asp:ListItem Text="Inactive" Value="1"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <asp:Label ID="lblAnimalLastUpdated" runat="server" Text=""></asp:Label>&nbsp;
+              <asp:Label ID="lblAnimalLastUpdatedBy" runat="server" Text=""></asp:Label>
+                                    <%--<asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" />--%>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <asp:Button ID="btnUpdateAnimal" class="btn btn-primary btn-inside" runat="server" Text="Save Changes" OnClick="btnUpdateAnimal_Click" />
+
+
+                                    </div>
+
+                                    <div></div>
+                                    <%--<asp:Label ID="Label7" runat="server" Text=""></asp:Label>
+    &nbsp;<asp:Label ID="Label8" runat="server" Text=""></asp:Label>--%>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="UpdateEducator" tabindex="-1" role="dialog">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Edit Educator</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlEducatorName" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="EducatorEditDiv">
+                                    <p>&nbsp;</p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Select Educator</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Select Educator</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalEducatorForm">
+
+                                            <asp:DropDownList ID="ddlEducatorName" class="form-control" runat="server" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="EducatorFirstName" DataValueField="EducatorID" OnSelectedIndexChanged="ddlEducator_SelectedIndexChanged1">
+                                                <asp:ListItem>--Select Educator--</asp:ListItem>
+
+                                            </asp:DropDownList>
+                                            &nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>First Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>First Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtEducatorFirst" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Last Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Last Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtEducatorLast" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlEducatorStatus" class="form-control" runat="server" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="Status" DataValueField="EducatorID">
+                                                <asp:ListItem>--Choose Educator Status--</asp:ListItem>
+                                                <asp:ListItem Text="Active" Value="Active"></asp:ListItem>
+                                                <asp:ListItem Text="Inactive" Value="Inactive"></asp:ListItem>
+                                            </asp:DropDownList>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+                                        <div class="row">
+                                            <div class=" col-12">
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%--<asp:Label ID="Label5" runat="server" Text=""></asp:Label>&nbsp;
+                            <asp:Label ID="Label6" runat="server" Text=""></asp:Label>--%>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <asp:Button ID="btnUpdateEducator" class="btn btn-primary btn-inside" runat="server" Text="Save Changes" OnClick="btnUpdateEducator_Click" />
+                        <%-- <button type="button" class="btn btn-primary btn-inside">Save changes</button>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="UpdateVolunteer" tabindex="-1" role="dialog">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Edit Volunteer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlVolunteerName" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="Div2">
+                                    <p>&nbsp;</p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Select Volunteer</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Select Volunteer</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalForm">
+
+                                            <asp:DropDownList ID="ddlVolunteerName" class="form-control" runat="server" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="VolunteerFirstName" DataValueField="VolunteerID" OnSelectedIndexChanged="ddlVolunteer_SelectedIndexChanged">
+                                                <asp:ListItem>--Select Volunteer--</asp:ListItem>
+                                            </asp:DropDownList>
+                                            &nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>First Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>First Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:TextBox ID="txtVolunteerFirstName" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Last Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Last Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtVolunteerLastName" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Phone Number</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Phone Number</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtVolunteerPhoneNumber" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Email</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Email</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtVolunteerEmail" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Status</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlVolunteerStatus" class="form-control" runat="server">
+                                                <asp:ListItem>--Select Status--</asp:ListItem>
+                                                <asp:ListItem Text="Active" Value="Active"></asp:ListItem>
+                                                <asp:ListItem Text="Inactive" Value="Inactive"></asp:ListItem>
+                                            </asp:DropDownList>
+
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="row">
+                                            <div class=" col-12">
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <%--<asp:Button ID="btnDeleteVolunteer" class="btn btn-primary btn-inside" runat="server" Text="Disable" OnClick="btnDeleteVolunteer_Click" />--%>
+                        <asp:Button ID="btnUpdateVolunteer" class="btn btn-primary btn-inside" runat="server" Text="Save Changes" OnClick="btnUpdateVolunteer_Click" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="UpdatePayment" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content mt-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" style="font-size: 145% !important; color: #e2561d !important;">Edit Invoice</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ddlInvoiceNumber" EventName="SelectedIndexChanged" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div runat="server" id="Div5">
+                                    <p>&nbsp;</p>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Select Invoice Number</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Select Invoice Number</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+                                            <asp:DropDownList ID="ddlInvoiceNumber" runat="server" class="form-control" AppendDataBoundItems="false" AutoPostBack="true" DataTextField="PaymentID" DataValueField="PaymentID" OnSelectedIndexChanged="ddlInvoiceNumber_SelectedIndexChanged">
+                                                <asp:ListItem>--Select Invoice Number--</asp:ListItem>
+
+                                            </asp:DropDownList>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Invoice Date</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Invoice Date</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtPaymentDate" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Program Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Program Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlProgramName" class="form-control" runat="server">
+                                                <asp:ListItem Text="--Select Program Name--" Value=""></asp:ListItem>
+
+                                            </asp:DropDownList>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Organization Name</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Organization Name</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlOrganizationName" class="form-control" runat="server">
+                                                <asp:ListItem Text="--Select Organization Name--" Value=""></asp:ListItem>
+                                            </asp:DropDownList>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Payment Amount</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Payment Amount</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtPaymentAmount" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Payment Type</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Payment Type</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlPaymentType" class="form-control" runat="server">
+                                                <asp:ListItem Text="--Select Payment Type--" Value=""></asp:ListItem>
+                                                <asp:ListItem Text="Check"></asp:ListItem>
+                                                <asp:ListItem Text="Credit"></asp:ListItem>
+                                                <asp:ListItem Text="Debit"></asp:ListItem>
+                                            </asp:DropDownList>&nbsp&nbsp
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Check Number</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Check Number</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:TextBox ID="txtCheckNumber" class="form-control" runat="server"></asp:TextBox>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Paid</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Paid</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlPaid" class="form-control" runat="server">
+                                                <asp:ListItem Text="--Select Payment Status--" Value=""></asp:ListItem>
+                                                <asp:ListItem Text="Paid" Value="Y"></asp:ListItem>
+                                                <asp:ListItem Text="Not Paid" Value="N"></asp:ListItem>
+                                            </asp:DropDownList>&nbsp&nbsp
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-none d-md-block text-right col-md-4 InternalOrganizationForm">
+                                            <h6>Invoice Status</h6>
+                                        </div>
+                                        <div class=" d-md-none text-left col-md-4 InternalOrganizationForm">
+                                            <h6>Invoice Status</h6>
+                                        </div>
+                                        <div class=" col-md-8 InternalAnimalForm">
+
+                                            <asp:DropDownList ID="ddlCancelledInvoices" class="form-control" runat="server">
+                                                <asp:ListItem Text="--Select Invoice Status--" Value=""></asp:ListItem>
+                                                <asp:ListItem Text="Invoice Cancelled " Value="Y"></asp:ListItem>
+                                                <asp:ListItem Text="Invoice Current" Value="N"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <asp:Label ID="Label7" runat="server" Text=""></asp:Label>&nbsp;
+              <asp:Label ID="Label8" runat="server" Text=""></asp:Label>
+                                    <%--<asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" />--%>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <asp:Button ID="PaymentUpdate" class="btn btn-primary btn-inside" runat="server" Text="Save Changes" OnClick="btnUpdatePayment_Click" />
+
+
+                                    </div>
+
+                                    <div></div>
+                                    <%--<asp:Label ID="Label7" runat="server" Text=""></asp:Label>
+    &nbsp;<asp:Label ID="Label8" runat="server" Text=""></asp:Label>--%>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+     <script>
+        //THESE ARE THE SCRIPTS FOR THE MODAL GOOGLE ADDRESS VALIDAOTR 
+        // This example displays an address form, using the autocomplete feature
+        // of the Google Places API to help users fill in the information.
+
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+        var placeSearch, autocomplete;
+        var componentForm = {
+            street_number: 'short_name',
+            route: 'long_name',
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+            country: 'long_name',
+            postal_code: 'short_name'
+        };
+
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                                            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+                { types: ['geocode'] });
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+
+        function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+
+            for (var component in componentForm) {
+
+                document.getElementById(component).value = '';
+                document.getElementById(component).disabled = false;
+            }
+
+            var array = [];
+
+
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+
+                var addressType = place.address_components[i].types[0];
+
+                
+                if (componentForm[addressType]) {
+
+
+                    var val = place.address_components[i][componentForm[addressType]];
+
+                    document.getElementById(addressType).value = val;
+
+                }
+
+            }
+
+            //array = string.split(",");
+            //document.getElementById("total2").value = array;
+            
+            var streetNumber = place.address_components[0].types[0];
+            var streetName = place.address_components[1].types[0];
+            document.getElementById("txtStreetAddress").value = place.address_components[0][componentForm[streetNumber]] + " " + place.address_components[1][componentForm[streetName]];
+
+            var city = place.address_components[2].types[0];
+            document.getElementById("textOrgCity").value = place.address_components[2][componentForm[city]];
+
+
+            var state = place.address_components[3].types[0];
+            document.getElementById("state").value = place.address_components[3][componentForm[state]];
+            
+            
+
+      
+            var zip = place.address_components[5].types[0];
+            document.getElementById("txtPostalCode").value = place.address_components[5][componentForm[zip]];
+            //var countryName = place.address_components[4].types[0];
+            //document.getElementById("countryName").value = place.address_components[4][componentForm[countryName]];
+            //var empty = place.address_components[6].types[0];
+            //document.getElementById("empty").value = place.address_components[6][componentForm[empty]];
+            
+            var hiddenControl = '<%= hiddenControl.ClientID %>';
+            document.getElementById(hiddenControl).value = document.getElementById("txtStreetAddress").value;
+
+            var hiddenCity = '<%= hiddenCity.ClientID %>';
+            document.getElementById(hiddenCity).value = document.getElementById("textOrgCity").value;
+
+            var hiddenState = '<%= hiddenState.ClientID %>';
+            document.getElementById(hiddenState).value = document.getElementById("state").value;
+
+            var hiddenZip = '<%= hiddenZip.ClientID %>';
+            document.getElementById(hiddenZip).value = document.getElementById("txtPostalCode").value;
+        }
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF5N5PVHlVRbvfo-7ogAYJzJikONTDWNA&libraries=places&callback=initAutocomplete"
+            async defer></script>
+    <script><script  type="text/javascript">
+        window.onbeforeunload=confirmExit;
+        function confirmExit()
+        {
+           if(window.event.clientY < 0 || window.event.clientY < -80)
+            {
+                var xmlhttp;        
+                if (window.ActiveXObject)
+                 { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    xmlhttp.open("GET","Default.aspx?Page=" + "Browser Closed",false);
+                    xmlhttp.send();
+                 }
+                else if(window.event.clientX < 0 || window.event.clientY < 0)
+                { // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET","Default.aspx?Page=" + "Browser Closed",false);
+                } 
+                else if(window.XMLHttpRequest)
+                { // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET","Default.aspx?Page=" + "Browser Closed",false);
+                    xmlhttp.send();                   
+                }
+            }
+        }  
+ </script>
+
+
+    <!-- end of do not delete -->
+</body>
+</html>
+
