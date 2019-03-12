@@ -1,2 +1,0 @@
-# GitHubExample
-Example Repository
